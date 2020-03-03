@@ -156,9 +156,5 @@ public class Reactor {
         this.setEstado(DAÑADO);
         this.funcional = false;
         return "600";
-    }
-    
-    
-   
-       
+    }  
 }
