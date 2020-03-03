@@ -5,10 +5,16 @@
  */
 package plantaNuclear.elements;
 
+import plantaNuclear.reactorManage.ReactorManage;
+
 /**
  *
  * @author andres
  */
 public class PlantaNuclear {
+    
+    private ReactorManage reactor;
+    
+    
     
 }

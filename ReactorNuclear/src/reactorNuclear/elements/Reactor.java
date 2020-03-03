@@ -14,16 +14,27 @@ public class Reactor {
     private int estado;
     private float carga;
     private boolean funcional;
+    
+    private int id;
 
     /////////////////////////////////////////////////////////////////////
-    public Reactor() {
+    public Reactor(int id) {
         
         this.estado = APAGADO;
         this.carga = 0;
         this.funcional = true;
-        
+        this.id = id;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    
     public int getEstado() {
         return estado;
     }
@@ -158,7 +169,39 @@ public class Reactor {
         return "600";
     }
     
+    /////////////////////////////////////////////////////////////////////////
+    public String interpretar(String entrada){
+        String respuesta;
+        String[] mensaje = entrada.split(";;");
+        switch(mensaje[0]){
+            case "APAGAR":
+                respuesta = this.apagar() +";;"+this.carga+";;"+this.isFuncional();
+                return respuesta;
+            
+            case "ENCENDER":
+                respuesta = this.encender()+";;"+this.carga+";;"+this.isFuncional();
+                return respuesta;
+                
+            case "DISMINUIR":
+                float disminucion = Float.parseFloat(mensaje[1]);
+                respuesta = this.disminuirCarga(disminucion) +";;"+this.carga+";;"+this.isFuncional();
+                return respuesta;
+                
+            case "AUMENTAR":
+                float aumento = Float.parseFloat(mensaje[1]);
+                respuesta = this.aumentarCarga(aumento)+";;"+this.carga+";;"+this.isFuncional();
+                return respuesta;
+                
+            case "REPARAR":
+                respuesta = this.reparar() +";;"+this.carga+";;"+this.isFuncional();
+                return respuesta;
+                
+        }
+        return "500";
+    }
     
+    
+    //////////////////////////////////////////////////////////////////////////
    
        
 }
