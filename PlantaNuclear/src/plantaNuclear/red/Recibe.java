@@ -11,45 +11,41 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import plantaNuclear.elements.Comunicacion;
+import plantaNuclear.operarioManege.OperarioManage;
 
 /**
  *
  * @author andres
  */
-public class Recibe implements Runnable {
+public class Recibe {
 
     ServerSocket listenSocket;
-    Comunicacion comunicacion;
-    
+    OperarioManage operarios;
 
     public Recibe(Comunicacion c) throws IOException {
 
-        this.comunicacion = c;
-        listenSocket = new ServerSocket(c.getPuerto());
+        listenSocket = new ServerSocket(4400);
         
+        operarios = new OperarioManage();
 
     }
 
-    @Override
-    public void run() {
+    public void procesar() {
+        try {
+            System.out.println("PLANTA: encendida");
 
-        while (true) {
-            System.out.println("SERVER: esperando un operario");
+            while (true) {
+                System.out.println("PLANTA: esperando operario");
 
-            Socket clientSocket = null;
-            try {
-                clientSocket = listenSocket.accept();
-            } catch (IOException ex) {
-                Logger.getLogger(Recibe.class.getName()).log(Level.SEVERE, null, ex);
+                Socket clientSocket = listenSocket.accept();
+
+                System.out.println("PLANTA: operario recibido "+clientSocket.getInetAddress().getHostName());
+
+                operarios.agregarOperario(clientSocket);
             }
-
-            System.out.println("SERVER: operario: "+clientSocket.getInetAddress().getHostName());
-
-            this.comunicacion.interpretar(clientSocket);
-
-            //hasher.process();
+        } catch (IOException e) {
+            System.out.println("Error connecting a client: " + e.getMessage());
         }
-
     }
 
 }

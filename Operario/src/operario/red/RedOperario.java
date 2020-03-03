@@ -81,7 +81,7 @@ public class RedOperario {
     
     public String chat(String mensaje){
         
-        String comando = "CHAT;;"+mensaje;
+        String comando = "0;;CHAT;;"+mensaje;
         return this.envia.enviar(conexion, comando);
     }
    

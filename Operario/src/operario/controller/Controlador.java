@@ -11,7 +11,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import operario.elements.Operario;
-import operario.views.PlantaView;
+import operario.views.ReactoresView;
 
 /**
  *
@@ -20,10 +20,10 @@ import operario.views.PlantaView;
 public class Controlador implements Runnable {
 
     private ServerSocket listenSocket;
-    private PlantaView planta;
+    private ReactoresView planta;
     
 
-    public Controlador(PlantaView p) throws IOException {
+    public Controlador(ReactoresView p) throws IOException {
 
         listenSocket = new ServerSocket(5555);
         this.planta = p;
